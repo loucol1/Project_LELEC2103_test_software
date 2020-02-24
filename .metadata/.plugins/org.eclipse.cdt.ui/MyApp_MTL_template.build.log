@@ -1,0 +1,73 @@
+10:55:15 **** Incremental Build of configuration Default for project MyApp_MTL_template ****
+make all 
+"arm-altera-eabi-gcc"  -g -O3 -Wall -I ../inc -I ../painter -I ../painter/fonts -I ../painter/graphic_lib -I ../painter/terasic_lib -I../..//mAbassi/Abassi -I../..//mAbassi/Platform/inc -I../..//mAbassi/Drivers/inc -I../..//mAbassi/Share/inc -I../..//mAbassi/FatFS-0.13a/inc -I../../Drivers/inc -I C:/intelFPGA/18.1/embedded/ip/altera/hps/altera_hps/hwlib/include/soc_cv_av -I C:/intelFPGA/18.1/embedded/ip/altera/hps/altera_hps/hwlib/include -DOS_START_STACK=8192 -DOS_SYS_CALL=1 -DSYS_CALL_DEV_I2C=1 -DSYS_CALL_DEV_TTY=1 -DSYS_CALL_TTY_EOF=4 -DI2C_DEBUG=0 -DI2C_OPERATION=0x00707 -DI2C_USE_MUTEX=1 -DMEDIA_DEBUG=1 -DSDMMC_BUFFER_TYPE=SDMMC_BUFFER_CACHED -DSDMMC_NUM_DMA_DESC=64 -DSDMMC_USE_MUTEX=1 -DUART_FULL_PROTECT=1 -DMEDIA_MDRV_SIZE=-1 -D_VOLUMES=2 -DSYS_CALL_N_DRV=2 -DMEDIA_AUTO_SELECT=0 -DMEDIA_SDMMC0_IDX=0 -DMEDIA_SDMMC0_DEV=SDMMC_DEV -DMEDIA_MDRV_IDX=1 -DDEMO_USE_SDMMC=1 -D soc_cv_av -D MYAPP_MTL -I../..//mAbassi/lwip-if -I../..//mAbassi/lwip-if/dw/RTOS -I../..//mAbassi/lwip-if/Abassi -I../..//mAbassi/lwip-1.4.1/src/include -I../..//mAbassi/lwip-1.4.1/src/include/lwip -I../..//mAbassi/lwip-1.4.1/src/include/ipv4 -I../..//mAbassi/lwip-1.4.1/src/include/netif -DLWIP_SOCKET=1 -DETH_DEBUG=1 -DOS_DEMO=-105 -DUART_Q_SIZE_RX=1 -DUART_Q_SIZE_TX=1 -DUART_CIRC_BUF_RX=2048 -DUART_CIRC_BUF_TX=2048 -std=gnu99 -mfpu=neon -march=armv7-a -mtune=cortex-a9 -mcpu=cortex-a9 -mfloat-abi=softfp -mno-unaligned-access -ffunction-sections -fdata-sections -Wstrict-prototypes -DOS_PLATFORM=0x0100AAC5 -DOS_N_CORE=2 -DOS_NEWLIB_REENT=0 -DUSE_SHELL=1 -DSHELL_LOGIN=0 -DSHELL_HISTORY=64 -c ../src/myApp_MTL.c -o myApp_MTL.o
+In file included from ../src/myApp_MTL.c:36:0:
+../src/../painter/terasic_lib/multi_touch.h:6:0: warning: "TOUCH_QUEUE_SIZE" redefined
+ #define TOUCH_QUEUE_SIZE    2
+ 
+In file included from ../src/touch.h:19:0,
+                 from ../src/myApp_MTL.c:30:
+../src/../painter/terasic_lib/multi_touch2.h:6:0: note: this is the location of the previous definition
+ #define TOUCH_QUEUE_SIZE    32
+ 
+../src/myApp_MTL.c:44:0: warning: "OS_TIMER_US" redefined
+ #define OS_TIMER_US 1000
+ 
+In file included from ../..//mAbassi/Abassi/mAbassi.h:46:0,
+                 from ../..//mAbassi/Share/inc/lwipopts.h:47,
+                 from ../..//mAbassi/lwip-1.4.1/src/include/lwip/opt.h:45,
+                 from ../..//mAbassi/lwip-1.4.1/src/include/lwip/sockets.h:37,
+                 from ../src/myApp_MTL.c:11:
+../..//mAbassi/Platform/inc/AbassiLib.h:102:0: note: this is the location of the previous definition
+    #define OS_TIMER_US  10000    /* When !=0 enable & timer vaalue in uS    */
+ 
+In file included from ../src/myApp_MTL.c:11:0:
+../src/myApp_MTL.c: In function 'Task_TXRX':
+../src/myApp_MTL.c:181:55: warning: passing argument 3 of 'lwip_accept' from incompatible pointer type [-Wincompatible-pointer-types]
+  accept_fd = accept(socket_fd, (struct sockaddr*)&isa,&addr_size);
+                                                       ^
+../..//mAbassi/lwip-1.4.1/src/include/lwip/sockets.h:346:47: note: in definition of macro 'accept'
+ #define accept(a,b,c)         lwip_accept(a,b,c)
+                                               ^
+../..//mAbassi/lwip-1.4.1/src/include/lwip/sockets.h:321:5: note: expected 'socklen_t * {aka long unsigned int *}' but argument is of type 'int *'
+ int lwip_accept(int s, struct sockaddr *addr, socklen_t *addrlen);
+     ^~~~~~~~~~~
+../src/myApp_MTL.c:191:62: warning: left-hand operand of comma expression has no effect [-Wunused-value]
+  sent_data = send(accept_fd, data_buffer,sizeof("Hello World",0), MSG_OOB);
+                                                              ^
+../..//mAbassi/lwip-1.4.1/src/include/lwip/sockets.h:358:45: note: in definition of macro 'send'
+ #define send(a,b,c,d)         lwip_send(a,b,c,d)
+                                             ^
+../src/myApp_MTL.c: In function 'Task_MTL':
+../src/myApp_MTL.c:231:22: warning: passing argument 1 of 'MTC_Init' makes integer from pointer without a cast [-Wint-conversion]
+   myTouch = MTC_Init(fpga_i2c, fpga_mtc, LCD_TOUCH_INT_IRQ);
+                      ^~~~~~~~
+In file included from ../src/myApp_MTL.c:36:0:
+../src/../painter/terasic_lib/multi_touch.h:62:11: note: expected 'uint32_t {aka long unsigned int}' but argument is of type 'void *'
+ MTC_INFO* MTC_Init(alt_u32 MUTI_TOUCH_I2C_BASE, alt_u32 MUTI_TOUCH_INT_BASE, alt_u32 INT_IRQ_NUM);
+           ^~~~~~~~
+../src/myApp_MTL.c:231:32: warning: passing argument 2 of 'MTC_Init' makes integer from pointer without a cast [-Wint-conversion]
+   myTouch = MTC_Init(fpga_i2c, fpga_mtc, LCD_TOUCH_INT_IRQ);
+                                ^~~~~~~~
+In file included from ../src/myApp_MTL.c:36:0:
+../src/../painter/terasic_lib/multi_touch.h:62:11: note: expected 'uint32_t {aka long unsigned int}' but argument is of type 'void *'
+ MTC_INFO* MTC_Init(alt_u32 MUTI_TOUCH_I2C_BASE, alt_u32 MUTI_TOUCH_INT_BASE, alt_u32 INT_IRQ_NUM);
+           ^~~~~~~~
+../src/myApp_MTL.c: In function 'Task_HPS_Led':
+../src/myApp_MTL.c:507:13: warning: 'PtrMsg' is used uninitialized in this function [-Wuninitialized]
+         if (MBXget(PrtMbx, PtrMsg, 0) == 0) {  // 0 = Never blocks
+             ^~~~~~~~~~~~~~~~~~~~~~~~~
+"arm-altera-eabi-gcc"  -g -O3 -Wall -I ../inc -I ../painter -I ../painter/fonts -I ../painter/graphic_lib -I ../painter/terasic_lib -I../..//mAbassi/Abassi -I../..//mAbassi/Platform/inc -I../..//mAbassi/Drivers/inc -I../..//mAbassi/Share/inc -I../..//mAbassi/FatFS-0.13a/inc -I../../Drivers/inc -I C:/intelFPGA/18.1/embedded/ip/altera/hps/altera_hps/hwlib/include/soc_cv_av -I C:/intelFPGA/18.1/embedded/ip/altera/hps/altera_hps/hwlib/include -DOS_START_STACK=8192 -DOS_SYS_CALL=1 -DSYS_CALL_DEV_I2C=1 -DSYS_CALL_DEV_TTY=1 -DSYS_CALL_TTY_EOF=4 -DI2C_DEBUG=0 -DI2C_OPERATION=0x00707 -DI2C_USE_MUTEX=1 -DMEDIA_DEBUG=1 -DSDMMC_BUFFER_TYPE=SDMMC_BUFFER_CACHED -DSDMMC_NUM_DMA_DESC=64 -DSDMMC_USE_MUTEX=1 -DUART_FULL_PROTECT=1 -DMEDIA_MDRV_SIZE=-1 -D_VOLUMES=2 -DSYS_CALL_N_DRV=2 -DMEDIA_AUTO_SELECT=0 -DMEDIA_SDMMC0_IDX=0 -DMEDIA_SDMMC0_DEV=SDMMC_DEV -DMEDIA_MDRV_IDX=1 -DDEMO_USE_SDMMC=1 -D soc_cv_av -D MYAPP_MTL -I../..//mAbassi/lwip-if -I../..//mAbassi/lwip-if/dw/RTOS -I../..//mAbassi/lwip-if/Abassi -I../..//mAbassi/lwip-1.4.1/src/include -I../..//mAbassi/lwip-1.4.1/src/include/lwip -I../..//mAbassi/lwip-1.4.1/src/include/ipv4 -I../..//mAbassi/lwip-1.4.1/src/include/netif -DLWIP_SOCKET=1 -DETH_DEBUG=1 -DOS_DEMO=-105 -DUART_Q_SIZE_RX=1 -DUART_Q_SIZE_TX=1 -DUART_CIRC_BUF_RX=2048 -DUART_CIRC_BUF_TX=2048 -std=gnu99 -mfpu=neon -march=armv7-a -mtune=cortex-a9 -mcpu=cortex-a9 -mfloat-abi=softfp -mno-unaligned-access -ffunction-sections -fdata-sections -Wstrict-prototypes -DOS_PLATFORM=0x0100AAC5 -DOS_N_CORE=2 -DOS_NEWLIB_REENT=0 -DUSE_SHELL=1 -DSHELL_LOGIN=0 -DSHELL_HISTORY=64 -c ../painter/terasic_lib/multi_touch.c -o multi_touch.o
+../painter/terasic_lib/multi_touch.c: In function 'MTC_Init':
+../painter/terasic_lib/multi_touch.c:85:9: warning: unused variable 'error' [-Wunused-variable]
+     int error;
+         ^~~~~
+"arm-altera-eabi-g++" -Wl,--gc-sections  -Wl,-L../../mAbassi/Platform/lib -Xlinker -Map -Xlinker Demo_105_SMP_DE0NANOSOC_A9_GCC.map 			\
+      -T ../../..//mAbassi/AR5_CY5.ld  main_mAbassi.o myApp_MTL.o TIMERinit.o alt_gpio.o arm_acp.o arm_pl330.o dw_i2c.o dw_uart.o MediaIF.o SysCall_CY5.o dw_sdmmc.o ff.o ffunicode.o Abassi_FatFS.o Media_FatFS.o SysCall_FatFS.o tahomabold_20.o tahomabold_32.o geometry.o gesture.o gui.o vip_fr.o simple_graphics.o simple_text.o debug.o queue.o gsensor.o touch.o multi_touch.o alt_generalpurpose_io.o alt_globaltmr.o alt_clock_manager.o netif_setup.o dw_ethernet.o api_lib.o api_msg.o autoip.o def.o dhcp.o dns.o err.o etharp.o ethernetif.o icmp.o igmp.o inet.o inet_chksum.o init.o ip.o ip_addr.o ip_frag.o mem.o memp.o netbuf.o netdb.o netif.o netifapi.o pbuf.o raw.o stats.o sys.o sys_arch.o sockets.o tcp.o tcp_in.o tcp_out.o tcpip.o timers.o udp.o mAbassiCfgA9.o Shell.o SubShell.o   -Wl,-l_mAbassi_EVAL_GCC_AR5_CY5 -Wl,-lcs3 -Wl,-lcs3unhosted -Wl,-lcs3arm					\
+          -Wl,-lgcc -Wl,-lc -o Demo_105_SMP_DE0NANOSOC_A9_GCC.axf
+"arm-altera-eabi-nm" Demo_105_SMP_DE0NANOSOC_A9_GCC.axf > Demo_105_SMP_DE0NANOSOC_A9_GCC.axf.map
+"arm-altera-eabi-objcopy" Demo_105_SMP_DE0NANOSOC_A9_GCC.axf -j vectors -j .rodata -j .text -j .data -j .bss --output-target=binary Demo_105_SMP_DE0NANOSOC_A9_GCC.bin
+Done
+
+10:55:17 Build Finished (took 1s.950ms)
+
